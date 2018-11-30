@@ -229,4 +229,18 @@ return [
 
     ],
 
+    'rate_limits' => [
+        // 访问频率限制 , 次数/分钟
+        'access' => [
+            'limit' => env('RATE_LIMITS' , 60),
+            'expires' => env('RATE_LIMITS_EXPIRES',1),
+        ],
+
+        // 登录相关
+        'sign' => [
+            'limit' => env('RATE_LIMITS',10),
+            'expires' => env('RATE_LIMITS_EXPIRES',1),
+        ]
+    ],
+
 ];
