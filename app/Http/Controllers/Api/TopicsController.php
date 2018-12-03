@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class TopicsController extends Controller
 {
+    /**
+     * 发布话题
+     * @param TopicRequest $request
+     * @param Topic $topic
+     * @return $this
+     */
     public function store(TopicRequest $request,Topic $topic)
     {
         $topic->fill($request->all());
@@ -19,6 +25,13 @@ class TopicsController extends Controller
                 ->setStatusCode(201);
     }
 
+    /**
+     * 更新话题
+     * @param TopicRequest $request
+     * @param Topic $topic
+     * @return \Dingo\Api\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function update(TopicRequest $request, Topic $topic)
     {
         $this->authorize('update',$topic);
@@ -26,5 +39,13 @@ class TopicsController extends Controller
         $topic->update($request->all());
 
         return $this->response->item($topic, new TopicTransformer());
+    }
+
+    public function destroy(Topic $topic)
+    {
+        $this->authorize('destroy',$topic);
+
+        $topic->delete();
+        return $this->response->noContent();
     }
 }
