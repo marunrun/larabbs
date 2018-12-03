@@ -15,7 +15,6 @@ class AuthorizationsController extends Controller
         }
 
         $driver = \Socialite::driver($type);
-
         try{
             if($code = $request->code){
                 $response = $driver->getAccessTokenResponse($code);
@@ -50,10 +49,8 @@ class AuthorizationsController extends Controller
                         'weixin_unionid' => $unionid,
                     ]);
                 }
-
                 break;
-
         }
-
+        return $this->response->array(['token'  => $user->id]);
     }
 }
