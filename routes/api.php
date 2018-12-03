@@ -47,12 +47,24 @@ $api->version('v1',[
         // 删除token
         $api->delete('authorization/current','AuthorizationsController@delete')
             ->name('api.authorization.destroy');
+        // 获取分类信息
+        $api->get('categories','CategoriesController@index')
+            ->name('api.categories.index');
+
+
 
         // 需要token验证的接口
         $api->group(['middleware' => 'api.auth'],function ($api){
+            // 当前登录用户的信息
             $api->get('user','UsersController@me')
                 ->name('api.user.show');
+            $api->patch('user','UsersController@update')
+                ->name('api.user.update');
+            // 图片资源
+            $api->post('images','ImagesController@store')
+                ->name('api.images.store');
         });
+
     });
 
 });
