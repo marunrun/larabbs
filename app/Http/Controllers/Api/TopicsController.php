@@ -37,13 +37,29 @@ class TopicsController extends Controller
         return $this->response->paginator($topics,new TopicTransformer());
     }
 
+    /**
+     * 某个用户发布的话题
+     * @param User $user
+     * @param Request $request
+     * @return \Dingo\Api\Http\Response
+     */
     public function userIndex(User $user,Request $request)
     {
         $topics = $user->topics()->recent()
             ->paginate(20);
         return $this->response->paginator($topics,new TopicTransformer());
     }
-    
+
+    /**
+     * 获取话题详情
+     * @param Topic $topic
+     * @return \Dingo\Api\Http\Response
+     */
+    public function show(Topic $topic)
+    {
+        return $this->response->item($topic,new TopicTransformer());
+    }
+
     /**
      * 发布话题
      * @param TopicRequest $request
