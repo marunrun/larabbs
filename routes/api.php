@@ -17,7 +17,7 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1',[
     'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => ['serializer:array','bindings']
+    'middleware' => ['serializer:array','bindings','change-locale']
 ],function ($api){
 
     $api->group([
@@ -65,6 +65,15 @@ $api->version('v1',[
         // 某个用户的回复列表
         $api->get('users/{user}/replies','RepliesController@userIndex')
             ->name('api.users.replies.index');
+        // 资源推荐
+        $api->get('links','LinksController@index')
+            ->name('api.links.index');
+        $api->get('actived/users','UsersController@activedIndex')
+            ->name('api.actived.users.index');
+
+
+
+
 
 
         // 需要token验证的接口

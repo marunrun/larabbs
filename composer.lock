@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b2770305356bc43fe7fc8fd1d7080c8",
+    "content-hash": "6aa5f0789a4907274359e3910874eb98",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -1534,6 +1534,55 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "jpush/jpush",
+            "version": "v3.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jpush/jpush-api-php-client.git",
+                "reference": "1f6982e3bdc6785038949a8f519933c2ea111d6d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jpush/jpush-api-php-client/zipball/1f6982e3bdc6785038949a8f519933c2ea111d6d",
+                "reference": "1f6982e3bdc6785038949a8f519933c2ea111d6d",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://dl.laravel-china.org/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JPush\\": "src/JPush/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "JPush",
+                    "email": "support@jpush.cn",
+                    "homepage": "https://www.jpush.cn/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "JPush API PHP Client",
+            "homepage": "https://github.com/jpush/jpush-api-php-client",
+            "time": "2018-09-27T09:20:41+00:00"
         },
         {
             "name": "laravel/framework",
@@ -3687,16 +3736,16 @@
         },
         {
             "name": "summerblue/administrator",
-            "version": "v1.1.4",
+            "version": "v1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/summerblue/administrator.git",
-                "reference": "a13939304c1dbba15ab56947f3ef9937657f586c"
+                "reference": "22869b39e471dcf43dd7eca7fd4839cc3836f14e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/summerblue/administrator/zipball/a13939304c1dbba15ab56947f3ef9937657f586c",
-                "reference": "a13939304c1dbba15ab56947f3ef9937657f586c",
+                "url": "https://api.github.com/repos/summerblue/administrator/zipball/22869b39e471dcf43dd7eca7fd4839cc3836f14e",
+                "reference": "22869b39e471dcf43dd7eca7fd4839cc3836f14e",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -3750,7 +3799,7 @@
                 "laravel",
                 "laravel-administrator"
             ],
-            "time": "2017-10-27T11:08:56+00:00"
+            "time": "2018-06-17T04:15:56+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
