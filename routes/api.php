@@ -50,8 +50,12 @@ $api->version('v1',[
         // 获取分类信息
         $api->get('categories','CategoriesController@index')
             ->name('api.categories.index');
-
-
+        // 获取话题
+        $api->get('topics','TopicsController@index')
+            ->name('api,topic.index');
+        // 获取某个用户发布的话题
+        $api->get('users/{user}/topics','TopicsController@userIndex')
+            ->name('api.users.topics.index');
 
         // 需要token验证的接口
         $api->group(['middleware' => 'api.auth'],function ($api){
