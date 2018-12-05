@@ -45,7 +45,7 @@ $api->version('v1',[
         $api->put('authorization/current','AuthorizationsController@update')
             ->name('api.authorization.update');
         // 删除token
-        $api->delete('authorization/current','AuthorizationsController@delete')
+        $api->delete('authorization/current','AuthorizationsController@destroy')
             ->name('api.authorization.destroy');
         // 获取分类信息
         $api->get('categories','CategoriesController@index')

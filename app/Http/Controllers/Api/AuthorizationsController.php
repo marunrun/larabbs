@@ -7,6 +7,10 @@ use App\Http\Requests\Api\SocialAuthorizationRequest;
 use App\Models\User;
 use Dingo\Api\Auth\Auth;
 use Illuminate\Http\Request;
+use League\OAuth2\Server\AuthorizationServer;
+use League\OAuth2\Server\Exception\OAuthServerException;
+use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response as PsrResponse;
 
 class AuthorizationsController extends Controller
 {
@@ -66,8 +70,14 @@ class AuthorizationsController extends Controller
      * 用户登录
      * @param AuthorizationRequest $request
      */
-    public function store(AuthorizationRequest $request)
+    public function store(AuthorizationRequest $request,AuthorizationServer $server, ServerRequestInterface $serverRequest)
     {
+        try{
+            return $server->respondToAccessTokenRequest($serverRequest, new PsrResponse())->withStatus(201);
+        }catch (OAuthServerException $e){
+            return $this->response->errorUnauthorized($e->getMessage());
+        }
+
         $username = $request->username;
         filter_var($username, FILTER_VALIDATE_EMAIL) ?
             $credentials['email'] = $username :
@@ -94,15 +104,27 @@ class AuthorizationsController extends Controller
         ]);
     }
 
-    public function update()
+    /**
+     * 刷新token
+     * @return mixed
+     */
+    public function update(AuthorizationServer $server, ServerRequestInterface $serverRequest)
     {
-        $token = \Auth::guard('api')->refresh();
-        return $this->responseWithToken($token);
+        try {
+            return $server->respondToAccessTokenRequest($serverRequest, new PsrResponse);
+        } catch(OAuthServerException $e) {
+            return $this->response->errorUnauthorized($e->getMessage());
+        }
     }
 
-    public function delete()
+    /**
+     * 删除token
+     * @return \Dingo\Api\Http\Response
+     */
+    public function destroy()
     {
-        \Auth::guard('api')->logout();
+        $this->user()->token()->revoke();
         return $this->response->noContent();
     }
+
 }
