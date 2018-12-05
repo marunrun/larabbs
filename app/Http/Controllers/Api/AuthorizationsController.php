@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\AuthorizationRequest;
 use App\Http\Requests\Api\SocialAuthorizationRequest;
 use App\Models\User;
+use App\Traits\PassportToken;
 use Dingo\Api\Auth\Auth;
 use Illuminate\Http\Request;
 use League\OAuth2\Server\AuthorizationServer;
@@ -14,6 +15,8 @@ use Zend\Diactoros\Response as PsrResponse;
 
 class AuthorizationsController extends Controller
 {
+    use PassportToken;
+
     /**
      * 第三方授权登录
      * @param $type
@@ -62,8 +65,8 @@ class AuthorizationsController extends Controller
                 }
                 break;
         }
-        $token = \Auth::guard('api')->fromUser($user);
-        return $this->responseWithToken($token)->serStatusCode(201);
+        $result = $this->getBearerTokenByUser($user,'1',false);
+        return $this->response->array($result)->setStatusCode(201);
     }
 
     /**
