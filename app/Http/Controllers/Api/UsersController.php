@@ -20,7 +20,7 @@ class UsersController extends Controller
     {
         $cache_key = env('SMS_PREFIX'). $request->phone .'_'. $request->verification_key;
         $verifyData = \Cache::get($cache_key);
-
+        
         if(!$verifyData){
             return $this->response->error('验证码已经失效',422);
         }
