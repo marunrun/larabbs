@@ -41,6 +41,9 @@ $api->version('v1',[
         // 登录
         $api->post('authorization','AuthorizationsController@store')
             ->name('api.authorization.store');
+        // 小程序登陆
+        $api->post('weapp/authorizations','AuthorizationsController@weappStore')
+            ->name('api.weapp.authorizations.store');
         // 刷新token
         $api->put('authorization/current','AuthorizationsController@update')
             ->name('api.authorization.update');
